@@ -30,11 +30,13 @@ def store_data_in_postgresql(data):
         user=DB_USER,
         password=DB_PASSWORD
     )
+
+    # creating a cursor to run the queries
     cursor = conn.cursor()
 
     # Create table if it doesn't exist
     create_table_query = '''
-        CREATE TABLE IF NOT EXISTS orders_table (
+        CREATE TABLE IF NOT EXISTS order_table (
             id INT,
             customerId TEXT,
             employeeId INT,
@@ -53,14 +55,16 @@ def store_data_in_postgresql(data):
 
     # Insert data into the table
     for entry in data:
-
         # Convert shipaddress and details dictionaries to JSON strings
         shipaddress_json = json.dumps(entry['shipAddress'])
         details_json = json.dumps(entry['details'])
 
+        shipped_date = entry['shippedDate']
+        if shipped_date == 'NULL':
+            shipped_date = None  # Set to None for NULL value
 
         insert_query = '''
-            INSERT INTO orders_table (id, customerId, employeeId, orderDate, requiredDate, shippedDate, shipVia, freight, shipName, shipAddress, details)
+            INSERT INTO order_table (id, customerId, employeeId, orderDate, requiredDate, shippedDate, shipVia, freight, shipName, shipAddress, details)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         '''
         cursor.execute(insert_query, (
@@ -69,7 +73,7 @@ def store_data_in_postgresql(data):
             entry['employeeId'], 
             entry['orderDate'], 
             entry['requiredDate'], 
-            entry['shippedDate'], 
+            shipped_date, 
             entry['shipVia'], 
             entry['freight'], 
             entry['shipName'], 
