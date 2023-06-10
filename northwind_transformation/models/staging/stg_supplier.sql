@@ -11,4 +11,4 @@ SELECT
 FROM
     base
 WHERE
-    rownum = 2
+    rownum = 1
