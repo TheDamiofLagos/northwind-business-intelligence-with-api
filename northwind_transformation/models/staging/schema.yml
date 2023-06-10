@@ -1,0 +1,39 @@
+
+version: 2
+
+models:
+  - name: stg_order
+    description: "A staging table for the raw order_table in DB"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+  
+  - name: stg_category
+    description: "A staging table for the raw category_table in DB"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_product
+    description: "A staging table for the raw product_table in DB"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_supplier
+    description: "A staging table for the raw supplier_table in DB"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
