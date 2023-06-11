@@ -39,3 +39,6 @@ models:
     
     production:
       +materialized: table
+seeds:
+  northwind_transformation:
+    +schema: seed_data
