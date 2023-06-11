@@ -37,3 +37,21 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: stg_customer
+    description: "A staging table for the seeded sd_customer file in the seeds folder"
+    columns:
+      - name: customerID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_shipper
+    description: "A staging table for the seeded sd_shipper file in the seeds folder"
+    columns:
+      - name: shipperID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
