@@ -2,20 +2,68 @@
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  - name: fact_orders
+    description: "A fact table containing details on all the order"
     columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: orderid
+        description: "The primary key for this table representing the individual orders"
         tests:
           - unique
           - not_null
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
+  - name: revenue_per_order
+    description: "A model that shows the total revenue for various orders. Revenue is calcualted by (quantity * unit price) - discount."
     columns:
-      - name: id
-        description: "The primary key for this table"
+      - name: orderid
+        description: "The primary key for this table representing the individual orders"
         tests:
           - unique
+          - not_null
+
+      - name: orderdate
+        description: "The date the order was placed"
+        
+      - name: shippeddate
+        description: "The date the order was shipped"
+      
+      - name: revenueperorder
+        description: "The total revenue from that order"
+
+  - name: big_table
+    description: "The Northwind BigTable is a comprehensive and transformed representation of the Northwind dataset. It serves as the foundation for our business analytics and reporting, providing a unified view of sales, customers, products, and other key entities. This BigTable combines multiple tables from the original Northwind dataset using dbt transformations, aggregations, and joins to create a denormalized and optimized schema for analytical purposes."
+    columns:
+      - name: encodedKey
+        description: "A UUID that acts as primary key for the table"
+        tests:
+          - unique
+          - not_null
+
+      - name: orderid
+        description: "An identification number for the order made"
+        tests:
+          - not_null
+
+      - name: orderdate
+        description: "The date the order was placed"
+        tests:
+          - not_null
+      
+      - name: shippeddate
+        description: "The date the order was shipped"
+        tests:
+          - not_null
+
+      - name: requireddate
+        description: "The date the order was required by the customer"
+        tests:
+          - not_null
+
+      - name: freight
+        description: "The weight of the entire order in Kiligrams. Should be averaged per orderID to get the weight of the entire order"
+        tests:
+          - not_null
+
+      - name: unitprice
+        description: "The cost of a unit of the product in Dollare"
+        tests:
           - not_null
