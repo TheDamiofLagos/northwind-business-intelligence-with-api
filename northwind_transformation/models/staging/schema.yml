@@ -55,3 +55,12 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: stg_employee
+    description: "A staging table for the seeded sd_employee file in the seeds folder"
+    columns:
+      - name: shipperID
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
