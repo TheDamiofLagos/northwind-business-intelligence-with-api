@@ -93,7 +93,7 @@ WITH
             id AS categoryID,
             name AS categoryName
         FROM
-            {{ref('dim_category')}}
+            {{ref('dim_category')}}sla
     )
 
 SELECT
